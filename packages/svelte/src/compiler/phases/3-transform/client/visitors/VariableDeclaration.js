@@ -28,6 +28,7 @@ export function VariableDeclaration(node, context) {
 				rune === '$effect.root' ||
 				rune === '$inspect' ||
 				rune === '$state.snapshot' ||
+				rune === '$state.signal' ||
 				rune === '$host'
 			) {
 				if (init != null && is_hoisted_function(init)) {

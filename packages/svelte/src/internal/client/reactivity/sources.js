@@ -132,9 +132,10 @@ export function mutate(source, value) {
  * @template V
  * @param {Source<V>} source
  * @param {V} value
+ * @param {boolean} [force] do not compare source value with new value, force update
  * @returns {V}
  */
-export function set(source, value) {
+export function set(source, value, force = false) {
 	if (
 		active_reaction !== null &&
 		is_runes() &&
@@ -146,17 +147,18 @@ export function set(source, value) {
 		e.state_unsafe_mutation();
 	}
 
-	return internal_set(source, value);
+	return internal_set(source, value, force);
 }
 
 /**
  * @template V
  * @param {Source<V>} source
  * @param {V} value
+ * @param {boolean} [force] do not compare source value with new value, force update
  * @returns {V}
  */
-export function internal_set(source, value) {
-	if (!source.equals(value)) {
+export function internal_set(source, value, force = false) {
+	if (!source.equals(value) || force) {
 		source.v = value;
 		source.version = increment_version();
 

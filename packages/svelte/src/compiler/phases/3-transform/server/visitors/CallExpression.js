@@ -32,7 +32,13 @@ export function CallExpression(node, context) {
 			is_ignored(node, 'state_snapshot_uncloneable') && b.true
 		);
 	}
-
+	if (rune === '$state.signal') {
+		return b.call(
+			'$.signal',
+			/** @type {Expression} */ (context.visit(node.arguments[0])),
+			is_ignored(node, 'state_snapshot_uncloneable') && b.true
+		);
+	}
 	if (rune === '$inspect' || rune === '$inspect().with') {
 		return transform_inspect_rune(node, context);
 	}

@@ -66,6 +66,7 @@ In non-runes mode, a `let` declaration is treated as reactive state if it is upd
 
 ## `$state.raw`
 
+
 State declared with `$state.raw` cannot be mutated; it can only be _reassigned_. In other words, rather than assigning to a property of an object, or using an array method like `push`, replace the object or array altogether if you'd like to update it:
 
 ```diff
@@ -107,6 +108,23 @@ To take a static snapshot of a deeply reactive `$state` proxy, use `$state.snaps
 ```
 
 This is handy when you want to pass some state to an external library or API that doesn't expect a proxy, such as `structuredClone`.
+
+## `$state.signal`
+
+In case where you want to force reactivity on the state
+
+```svelte
+<script>
+	let counter = $state({ count: 0 });
+
+	function onclick() {
+		// Will trigger reactivity on all counter binding
+		$state.signal(counter);
+	}
+</script>
+```
+
+This is handy when working with external library that uses callbacks for passing changes.
 
 ## `$derived`
 

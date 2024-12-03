@@ -23,6 +23,12 @@ export function CallExpression(node, context) {
 				/** @type {Expression} */ (context.visit(node.arguments[0])),
 				is_ignored(node, 'state_snapshot_uncloneable') && b.true
 			);
+		case '$state.signal':
+			return b.call(
+				'$.signal',
+				/** @type {Expression} */ (context.visit(node.arguments[0])),
+				is_ignored(node, 'state_snapshot_uncloneable') && b.true
+			);
 
 		case '$effect.root':
 			return b.call(

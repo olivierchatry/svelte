@@ -142,7 +142,13 @@ export function CallExpression(node, context) {
 			}
 
 			break;
-	}
+		case '$state.signal':
+			if (node.arguments.length !== 1) {
+				e.rune_invalid_arguments_length(node, rune, 'exactly one argument');
+			}
+
+			break;
+		}
 
 	if (context.state.render_tag) {
 		// Find out which of the render tag arguments contains this call expression

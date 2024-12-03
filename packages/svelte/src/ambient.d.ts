@@ -139,6 +139,26 @@ declare namespace $state {
 	 */
 	export function snapshot<T>(state: T): Snapshot<T>;
 
+	/**
+	 * Force the state to trigger reactivity
+	 *
+	 * Example:
+	 * ```ts
+	 * <script>
+	 *   let counter = $state({ count: 0 });
+	 *
+	 *   function onclick() {
+	 *     // will trigger reactivity on counter even if not changed
+	 *     $state.signal(counter)
+	 *   };
+	 * </script>
+	 * ```
+	 *
+	 * https://svelte.dev/docs/svelte/$state#$state.signal
+	 *
+	 * @param state The value to update
+	 */
+	export function signal<T>(state: T): void;
 	// prevent intellisense from being unhelpful
 	/** @deprecated */
 	export const apply: never;
