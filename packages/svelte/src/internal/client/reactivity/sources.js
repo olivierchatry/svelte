@@ -213,6 +213,14 @@ export function internal_set(source, value, force = false) {
 }
 
 /**
+ * @template V
+ * @param {Source<V>} source
+ * @returns {V}
+ */
+export function signal(source) {
+	return set(source, source.v, true);
+}
+/**
  * @param {Value} signal
  * @param {number} status should be DIRTY or MAYBE_DIRTY
  * @returns {void}
